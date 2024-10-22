@@ -35,8 +35,8 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        binding.btnExecutar.setOnClickListener{
-            cadastrarUsuario()
+        binding.btnCadastrase.setOnClickListener{
+            startActivity(Intent(this,CadastroActivity::class.java))
         }
 
         binding.btnLogin.setOnClickListener{
@@ -49,26 +49,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun cadastrarUsuario(){
-        val email  = "fernandopro1201@gmail.com"
-        val senha = "Fernando@2024"
 
-        //Tela de cadastro do seu app..
-
-
-        //Passar os paramentros para criação do usuario $email e $senha
-        autenticacao.createUserWithEmailAndPassword(email,senha)
-            .addOnSuccessListener { authResult->
-                val id = authResult.user?.uid
-                val email = authResult.user?.email
-
-                binding.txtResultado.text = "Sucesso ao criar conta.. $id - $email"
-            }.addOnFailureListener{exception ->
-                val mensagemErro = exception.message
-                binding.txtResultado.text = "Error: $mensagemErro"
-
-            }
-    }
 
     private fun verificarUsuarioLogado(){
         val usuario = autenticacao.currentUser
